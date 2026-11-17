@@ -45,6 +45,10 @@ python google_search.py "string to be searched"
 
 Automated querying may violate [Google's Terms of Service](https://policies.google.com/terms). Use it for learning, small personal experiments and low volume only, respect rate limits, and consider the official [Custom Search JSON API](https://developers.google.com/custom-search/v1/overview) for anything serious. You are responsible for how you use this code.
 
+## Security note
+
+The `googlesearch` library stores a session cookie in a local `.google-cookie` file. It is a credential: it is listed in `.gitignore` and must never be committed or shared. If a cookie was ever published, treat it as compromised and sign out of / invalidate that Google session.
+
 ## Em português
 
 Script Python que faz uma busca no Google pela linha de comando e guarda as 10 primeiras URLs de resultado na lista `results`, usando o pacote `google` (módulo `googlesearch`).
@@ -52,6 +56,7 @@ Script Python que faz uma busca no Google pela linha de comando e guarda as 10 p
 - Instalação: `pip install google`
 - Uso: `python google_search.py "texto da busca"` (use aspas)
 - Limitações: o script ainda não imprime nem salva os resultados; só retorna URLs; o Google pode bloquear consultas automatizadas.
+- Segurança: o arquivo `.google-cookie` guarda um cookie de sessão; nunca o versione nem o compartilhe.
 - Uso responsável: automatizar buscas pode violar os Termos de Serviço do Google. Use com moderação ou prefira a API oficial (Custom Search JSON API).
 
 ## License
