@@ -1,10 +1,53 @@
-# python-google-search
+<a id="top"></a>
 
-> Tiny Python script that runs a Google Search from the command line and collects the first 10 result URLs, using the [`google`](https://pypi.org/project/google/) package (`googlesearch` module).
+<div align="center">
 
-**Keywords:** python google search, google search automation, command line google search, scrape google results, googlesearch, python script.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/voaneves/python-google-search/main/assets/logo/logo-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/voaneves/python-google-search/main/assets/logo/logo-light.svg" />
+  <img alt="Python Google Search logo: the monogram GS" src="https://raw.githubusercontent.com/voaneves/python-google-search/main/assets/logo/logo-light.svg" width="112" height="112" />
+</picture>
+
+<h1>Python Google Search</h1>
+
+<p>
+  <strong>Command-line script that runs a Google search and collects the first 10 result URLs.</strong><br />
+  <sub>Uses the google package (googlesearch module)</sub>
+</p>
+
+<p>
+  <a href="https://voaneves.github.io/python-google-search/"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/voaneves/python-google-search/main/assets/buttons/landing-dark.svg" /><img alt="View landing page" src="https://raw.githubusercontent.com/voaneves/python-google-search/main/assets/buttons/landing-light.svg" height="40" /></picture></a>
+  <a href="https://github.com/voaneves/python-google-search/blob/main/google_search.py"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/voaneves/python-google-search/main/assets/buttons/script-dark.svg" /><img alt="View the script" src="https://raw.githubusercontent.com/voaneves/python-google-search/main/assets/buttons/script-light.svg" height="40" /></picture></a>
+</p>
+
+<p><sub>Need something like this? <a href="https://voaneves.com/en/#contact"><strong>Let's talk →</strong></a></sub></p>
+
+<p>
+  <a href="https://github.com/voaneves/python-google-search/blob/main/LICENSE"><img src="https://img.shields.io/github/license/voaneves/python-google-search?style=flat-square&color=0A0A0A" alt="MIT License" /></a>
+  <img src="https://img.shields.io/badge/Python-3-b80000?style=flat-square" alt="Python 3" />
+  <a href="https://github.com/voaneves/python-google-search/issues"><img src="https://img.shields.io/github/issues/voaneves/python-google-search?style=flat-square&color=0A0A0A" alt="Open issues" /></a>
+</p>
+
+<p>
+  <a href="#what-it-does">What it does</a> ·
+  <a href="#installation">Installation</a> ·
+  <a href="#usage">Usage</a> ·
+  <a href="#limitations">Limitations</a> ·
+  <a href="#responsible-use">Responsible use</a> ·
+  <a href="#contact">Contact</a>
+</p>
+
+</div>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/voaneves/python-google-search/main/assets/brand/rule-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/voaneves/python-google-search/main/assets/brand/rule-light.svg" />
+  <img alt="" src="https://raw.githubusercontent.com/voaneves/python-google-search/main/assets/brand/rule-light.svg" width="100%" />
+</picture>
 
 ## What it does
+
+Run it with a search phrase and it collects the URLs of the first ten Google results into a Python list.
 
 `google_search.py` takes a search string as a command-line argument, turns spaces into `+`, queries Google (`tld="com"`, `num=10`, `stop=10`, `pause=2` seconds between requests) and stores the result URLs in a list called `results`.
 
@@ -59,6 +102,19 @@ Script Python que faz uma busca no Google pela linha de comando e guarda as 10 p
 - Segurança: o arquivo `.google-cookie` guarda um cookie de sessão; nunca o versione nem o compartilhe.
 - Uso responsável: automatizar buscas pode violar os Termos de Serviço do Google. Use com moderação ou prefira a API oficial (Custom Search JSON API).
 
-## License
+## Contact
 
-MIT, see [LICENSE](LICENSE).
+<p>
+  <a href="https://voaneves.com/en/#contact"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/voaneves/python-google-search/main/assets/buttons/hire-dark.svg" /><img alt="Let's talk" src="https://raw.githubusercontent.com/voaneves/python-google-search/main/assets/buttons/hire-light.svg" height="40" /></picture></a>
+  <a href="https://voaneves.com/en/"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/voaneves/python-google-search/main/assets/buttons/site-dark.svg" /><img alt="voaneves.com" src="https://raw.githubusercontent.com/voaneves/python-google-search/main/assets/buttons/site-light.svg" height="40" /></picture></a>
+</p>
+
+<a href="https://linkedin.com/in/voaneves">LinkedIn</a> · <a href="mailto:victorneves478@gmail.com">E-mail</a>
+
+<p align="center">
+  <img alt="VOANEVES mark" src="https://raw.githubusercontent.com/voaneves/python-google-search/main/assets/brand/mark-duo.svg" width="32" height="32" />
+</p>
+
+<p align="center"><sub>Released under the <a href="https://github.com/voaneves/python-google-search/blob/main/LICENSE">MIT License</a>.</sub></p>
+
+<p align="center"><sub><a href="#top">↑ Back to top</a></sub></p>

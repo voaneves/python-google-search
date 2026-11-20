@@ -1,0 +1,53 @@
+{
+  "repo": "python-google-search",
+  "branch": "main",
+  "lang": "en",
+  "license": "MIT",
+  "name": "Python Google Search",
+  "tagline": "Command-line script that runs a Google search and collects the first 10 result URLs.",
+  "description": "Python script that runs a Google search from the command line and collects the first 10 result URLs. MIT licensed.",
+  "logo": {
+    "mark": "GS"
+  },
+  "buttons": [
+    {
+      "id": "landing",
+      "text": "View landing page",
+      "kind": "primary",
+      "font": "sans",
+      "href": "https://voaneves.github.io/python-google-search/",
+      "landing": false
+    },
+    {
+      "id": "script",
+      "text": "View the script",
+      "kind": "secondary",
+      "href": "https://github.com/voaneves/python-google-search/blob/main/google_search.py",
+      "landing_kind": "primary",
+      "font": "sans"
+    },
+    {
+      "id": "hire",
+      "text": "Let's talk",
+      "kind": "primary",
+      "font": "sans",
+      "href": "https://voaneves.com/en/#contact",
+      "landing": false
+    },
+    {
+      "id": "site",
+      "text": "voaneves.com",
+      "kind": "secondary",
+      "font": "sans",
+      "href": "https://voaneves.com/en/",
+      "landing": false
+    }
+  ],
+  "features": [
+    "Takes the query as a quoted command-line argument.",
+    "Collects the first 10 result URLs into a list.",
+    "Pauses 2 seconds between requests."
+  ],
+  "landing": true,
+  "live_url": "https://voaneves.github.io/python-google-search/"
+}

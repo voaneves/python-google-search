@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Python Google Search - Command-line script that runs a Google search and collects the first 10 result URLs.</title>
+<meta name="description" content="Python script that runs a Google search from the command line and collects the first 10 result URLs. MIT licensed.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4ead4">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
+<link rel="canonical" href="https://voaneves.github.io/python-google-search/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%20width%3D%22512%22%20height%3D%22512%22%20role%3D%22img%22%20aria-label%3D%22Python%20Google%20Search%20logo%22%3E%20%20%3Cpath%20fill%3D%22%230a0a0a%22%20d%3D%22M256%208a248%20248%200%200%200%200%20496Z%22%2F%3E%20%20%3Cpath%20fill%3D%22%23f4ead4%22%20d%3D%22M256%208a248%20248%200%200%201%200%20496Z%22%2F%3E%20%20%3Ccircle%20cx%3D%22256%22%20cy%3D%22256%22%20r%3D%22248%22%20fill%3D%22none%22%20stroke%3D%22%230a0a0a%22%20stroke-width%3D%2216%22%2F%3E%20%20%3Cdefs%3E%20%20%20%20%3CclipPath%20id%3D%22vn-l%22%3E%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%22256%22%20height%3D%22512%22%2F%3E%3C%2FclipPath%3E%20%20%20%20%3CclipPath%20id%3D%22vn-r%22%3E%3Crect%20x%3D%22256%22%20y%3D%220%22%20width%3D%22256%22%20height%3D%22512%22%2F%3E%3C%2FclipPath%3E%20%20%3C%2Fdefs%3E%20%20%3Cpath%20fill%3D%22%23f4ead4%22%20clip-path%3D%22url%28%23vn-l%29%22%20d%3D%22M236.1%20290.3Q236.1%20291.8%20235.9%20292.3Q235.7%20292.8%20235%20292.8Q233.9%20292.8%20230.9%20291.2Q227.8%20289.6%20223.9%20287.4Q220%20285.2%20216.4%20283.5Q212.8%20281.8%20210.6%20281.8Q209.6%20281.8%20207.2%20283.5Q204.8%20285.2%20200.9%20287.2Q197.1%20289.3%20191.6%20290.9Q186.1%20292.6%20178.9%20292.6Q163.7%20292.6%20151.4%20287.3Q139.1%20282.1%20130%20272.3Q120.9%20262.6%20116%20249.4Q111%20236.1%20111%20220.4Q111%20202.5%20116.3%20188Q121.6%20173.6%20131.4%20163.1Q141.1%20152.6%20154.7%20146.9Q168.2%20141.3%20184.6%20141.3Q193.4%20141.3%20199.4%20143.6Q205.5%20145.9%20208.8%20148.3Q212.2%20150.6%20213%20150.6Q215%20150.6%20218.1%20148.3Q221.3%20146%20224.3%20143.7Q227.3%20141.4%20228.6%20141.4Q228.8%20141.4%20229.2%20141.6Q229.5%20141.9%20229.5%20143.2L237.2%20188.5Q237.5%20189.1%20237.4%20189.4Q237.3%20189.8%20237%20189.9Q236.8%20190%20236.5%20189.9Q236.1%20189.8%20235.8%20189.2Q229.3%20172.6%20221.3%20162.5Q213.3%20152.4%20204.1%20147.7Q195%20143.1%20185.1%20143.1Q172.3%20143.1%20162.4%20151.1Q152.6%20159.1%20147%20175Q141.5%20190.9%20141.5%20214.9Q141.5%20238.1%20147.6%20254.5Q153.8%20270.9%20164.1%20279.6Q174.3%20288.4%20186.7%20288.4Q190%20288.4%20193.9%20287.3Q197.9%20286.2%20201.4%20284.2Q204.8%20282.3%20207%20279.4Q209.2%20276.6%20209.2%20273.2V232.3Q209.2%20231%20208.2%20230.3Q207.2%20229.6%20205.1%20229.4L192.9%20228.1Q192.2%20228%20191.9%20227.7Q191.6%20227.5%20191.6%20227.3Q191.6%20227.1%20191.9%20226.8Q192.1%20226.6%20192.6%20226.6H245.7Q246.1%20226.6%20246.3%20226.8Q246.5%20227.1%20246.5%20227.2Q246.5%20227.5%20246.3%20227.7Q246%20227.8%20245.3%20228.1L239%20229.5Q237.6%20229.7%20236.8%20230.4Q236.1%20231%20236.1%20232.3ZM321.2%20292.7Q311.5%20292.7%20305.3%20289.9Q299.1%20287%20295.5%20284.2Q292%20281.4%20290.7%20281.4Q289.9%20281.4%20288.3%20283.2Q286.7%20285%20284.8%20287.2Q283%20289.5%20281.3%20291.3Q279.6%20293.2%20278.7%20293.2Q278.2%20293.2%20277.5%20292.7Q276.8%20292.2%20276.5%20291.3L268.7%20246Q268.6%20245.4%20268.6%20245.1Q268.6%20244.7%20268.9%20244.5Q269.2%20244.3%20269.6%20244.5Q270%20244.8%20270.1%20245.2Q279%20263.2%20287.2%20273Q295.4%20282.9%20303.3%20286.7Q311.2%20290.6%20318.9%20290.6Q330.3%20290.6%20337.1%20284.4Q343.9%20278.2%20343.9%20266.1Q343.9%20258.7%20340.8%20252.5Q337.8%20246.2%20330.5%20241Q323.2%20235.8%20310.6%20231.2Q294%20225.3%20284.1%20218.3Q274.2%20211.3%20269.8%20202.6Q265.5%20194%20265.5%20183.3Q265.5%20171%20271.8%20161.4Q278.1%20151.9%20289.1%20146.6Q300.2%20141.3%20314.4%20141.3Q323.1%20141.3%20328.9%20143.4Q334.8%20145.6%20338.1%20147.7Q341.5%20149.9%20343.1%20149.9Q344.5%20149.9%20347.2%20147.6Q349.9%20145.4%20352.6%20143.1Q355.3%20140.8%20356.4%20140.8Q356.8%20140.8%20357.3%20141.2Q357.7%20141.5%20357.8%20142.3L369.1%20187.3Q369.2%20187.9%20369.1%20188.3Q369.1%20188.7%20368.7%20188.9Q368.4%20188.9%20368.1%20188.7Q367.7%20188.6%20367.5%20188.1Q358%20170.5%20349.5%20160.8Q341.1%20151%20333%20147.2Q324.8%20143.3%20316.2%20143.3Q305.2%20143.3%20298.1%20150.4Q291%20157.5%20291%20169.8Q291%20177.5%20293.9%20183.9Q296.8%20190.3%20303.8%20195.7Q310.8%20201.1%20322.9%20205.4Q340.1%20211.7%20350.1%20218.7Q360.1%20225.7%20364.3%20233.9Q368.5%20242.1%20368.5%20252Q368.5%20263.4%20362.9%20272.6Q357.3%20281.9%20346.7%20287.3Q336.1%20292.7%20321.2%20292.7Z%22%2F%3E%20%20%3Cpath%20fill%3D%22%230a0a0a%22%20clip-path%3D%22url%28%23vn-r%29%22%20d%3D%22M236.1%20290.3Q236.1%20291.8%20235.9%20292.3Q235.7%20292.8%20235%20292.8Q233.9%20292.8%20230.9%20291.2Q227.8%20289.6%20223.9%20287.4Q220%20285.2%20216.4%20283.5Q212.8%20281.8%20210.6%20281.8Q209.6%20281.8%20207.2%20283.5Q204.8%20285.2%20200.9%20287.2Q197.1%20289.3%20191.6%20290.9Q186.1%20292.6%20178.9%20292.6Q163.7%20292.6%20151.4%20287.3Q139.1%20282.1%20130%20272.3Q120.9%20262.6%20116%20249.4Q111%20236.1%20111%20220.4Q111%20202.5%20116.3%20188Q121.6%20173.6%20131.4%20163.1Q141.1%20152.6%20154.7%20146.9Q168.2%20141.3%20184.6%20141.3Q193.4%20141.3%20199.4%20143.6Q205.5%20145.9%20208.8%20148.3Q212.2%20150.6%20213%20150.6Q215%20150.6%20218.1%20148.3Q221.3%20146%20224.3%20143.7Q227.3%20141.4%20228.6%20141.4Q228.8%20141.4%20229.2%20141.6Q229.5%20141.9%20229.5%20143.2L237.2%20188.5Q237.5%20189.1%20237.4%20189.4Q237.3%20189.8%20237%20189.9Q236.8%20190%20236.5%20189.9Q236.1%20189.8%20235.8%20189.2Q229.3%20172.6%20221.3%20162.5Q213.3%20152.4%20204.1%20147.7Q195%20143.1%20185.1%20143.1Q172.3%20143.1%20162.4%20151.1Q152.6%20159.1%20147%20175Q141.5%20190.9%20141.5%20214.9Q141.5%20238.1%20147.6%20254.5Q153.8%20270.9%20164.1%20279.6Q174.3%20288.4%20186.7%20288.4Q190%20288.4%20193.9%20287.3Q197.9%20286.2%20201.4%20284.2Q204.8%20282.3%20207%20279.4Q209.2%20276.6%20209.2%20273.2V232.3Q209.2%20231%20208.2%20230.3Q207.2%20229.6%20205.1%20229.4L192.9%20228.1Q192.2%20228%20191.9%20227.7Q191.6%20227.5%20191.6%20227.3Q191.6%20227.1%20191.9%20226.8Q192.1%20226.6%20192.6%20226.6H245.7Q246.1%20226.6%20246.3%20226.8Q246.5%20227.1%20246.5%20227.2Q246.5%20227.5%20246.3%20227.7Q246%20227.8%20245.3%20228.1L239%20229.5Q237.6%20229.7%20236.8%20230.4Q236.1%20231%20236.1%20232.3ZM321.2%20292.7Q311.5%20292.7%20305.3%20289.9Q299.1%20287%20295.5%20284.2Q292%20281.4%20290.7%20281.4Q289.9%20281.4%20288.3%20283.2Q286.7%20285%20284.8%20287.2Q283%20289.5%20281.3%20291.3Q279.6%20293.2%20278.7%20293.2Q278.2%20293.2%20277.5%20292.7Q276.8%20292.2%20276.5%20291.3L268.7%20246Q268.6%20245.4%20268.6%20245.1Q268.6%20244.7%20268.9%20244.5Q269.2%20244.3%20269.6%20244.5Q270%20244.8%20270.1%20245.2Q279%20263.2%20287.2%20273Q295.4%20282.9%20303.3%20286.7Q311.2%20290.6%20318.9%20290.6Q330.3%20290.6%20337.1%20284.4Q343.9%20278.2%20343.9%20266.1Q343.9%20258.7%20340.8%20252.5Q337.8%20246.2%20330.5%20241Q323.2%20235.8%20310.6%20231.2Q294%20225.3%20284.1%20218.3Q274.2%20211.3%20269.8%20202.6Q265.5%20194%20265.5%20183.3Q265.5%20171%20271.8%20161.4Q278.1%20151.9%20289.1%20146.6Q300.2%20141.3%20314.4%20141.3Q323.1%20141.3%20328.9%20143.4Q334.8%20145.6%20338.1%20147.7Q341.5%20149.9%20343.1%20149.9Q344.5%20149.9%20347.2%20147.6Q349.9%20145.4%20352.6%20143.1Q355.3%20140.8%20356.4%20140.8Q356.8%20140.8%20357.3%20141.2Q357.7%20141.5%20357.8%20142.3L369.1%20187.3Q369.2%20187.9%20369.1%20188.3Q369.1%20188.7%20368.7%20188.9Q368.4%20188.9%20368.1%20188.7Q367.7%20188.6%20367.5%20188.1Q358%20170.5%20349.5%20160.8Q341.1%20151%20333%20147.2Q324.8%20143.3%20316.2%20143.3Q305.2%20143.3%20298.1%20150.4Q291%20157.5%20291%20169.8Q291%20177.5%20293.9%20183.9Q296.8%20190.3%20303.8%20195.7Q310.8%20201.1%20322.9%20205.4Q340.1%20211.7%20350.1%20218.7Q360.1%20225.7%20364.3%20233.9Q368.5%20242.1%20368.5%20252Q368.5%20263.4%20362.9%20272.6Q357.3%20281.9%20346.7%20287.3Q336.1%20292.7%20321.2%20292.7Z%22%2F%3E%20%20%3Ccircle%20cx%3D%22256%22%20cy%3D%22347.2%22%20r%3D%2224%22%20fill%3D%22%23d70000%22%2F%3E%3C%2Fsvg%3E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Python Google Search - Command-line script that runs a Google search and collects the first 10 result URLs.">
+<meta property="og:description" content="Python script that runs a Google search from the command line and collects the first 10 result URLs. MIT licensed.">
+<meta property="og:url" content="https://voaneves.github.io/python-google-search/">
+<meta property="og:image" content="https://voaneves.github.io/python-google-search/logo-512.png">
+<meta property="og:image:alt" content="Python Google Search logo">
+<meta name="twitter:card" content="summary">
+<style>
+:root{
+  --surface:#f4ead4;
+  --surface-alt:#e8dec5;
+  --text:#0a0a0a;
+  --muted:#4a4437;
+  --link:#b80000;
+  --focus:#b80000;
+  --btn-primary-fill:#0a0a0a;
+  --btn-primary-text:#f4ead4;
+  --btn-primary-signal:#ff3838;
+  --btn-secondary-fill:#f4ead4;
+  --btn-secondary-text:#0a0a0a;
+  --btn-secondary-border:#0a0a0a;
+  --btn-command-prompt:#b80000;
+  --logo-ink:#0a0a0a;
+  --logo-paper:#f4ead4;
+  --logo-ring:#0a0a0a;
+  --logo-signal:#d70000;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+  --surface:#121110;
+    --surface-alt:#1c1a17;
+    --text:#f4ead4;
+    --muted:#b8ae98;
+    --link:#ff5a5a;
+    --focus:#ff5a5a;
+    --btn-primary-fill:#e8dec5;
+    --btn-primary-text:#0a0a0a;
+    --btn-primary-signal:#b80000;
+    --btn-secondary-fill:#1c1a17;
+    --btn-secondary-text:#e8dec5;
+    --btn-secondary-border:#8a816f;
+    --btn-command-prompt:#ff5a5a;
+    --logo-ink:#0a0a0a;
+    --logo-paper:#f4ead4;
+    --logo-ring:#e8dec5;
+    --logo-signal:#d70000;
+  }
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--text);font:1.0625rem/1.6 var(--sans)}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+.skip{position:absolute;left:1rem;top:-4rem;padding:.75rem 1rem;background:var(--btn-primary-fill);color:var(--btn-primary-text);border-radius:4px;font-weight:600;z-index:10}
+.skip:focus{top:1rem}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.wrap{width:100%;max-width:60rem;margin:0 auto;padding:0 1rem}
+.hero{padding:4rem 0 3rem;text-align:center}
+.logo{display:block;margin:0 auto 1.5rem;width:7rem;height:7rem}
+.logo-img{display:block;margin:0 auto 1.5rem;max-width:100%;height:auto}
+h1{margin:0;font-size:clamp(2rem,6vw,3.25rem);line-height:1.1;letter-spacing:-.02em}
+.tagline{margin:1rem auto 0;max-width:34rem;font-size:clamp(1.15rem,3.2vw,1.45rem);font-weight:700;line-height:1.35}
+.lead{margin:1rem auto 0;max-width:36rem;color:var(--muted)}
+.actions{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin:2rem 0 0;padding:0;list-style:none}
+.btn{display:inline-flex;align-items:center;gap:.6rem;min-height:3rem;padding:0 1.25rem;border:1.5px solid transparent;border-radius:4px;font-weight:600;font-size:1rem;line-height:1;text-decoration:none;max-width:100%}
+.btn-primary{background:var(--btn-primary-fill);color:var(--btn-primary-text)}
+.btn-secondary{background:var(--btn-secondary-fill);color:var(--btn-secondary-text);border-color:var(--btn-secondary-border)}
+.btn-command{font-family:var(--mono);font-weight:500;font-size:.9375rem}
+.dot{width:.5rem;height:.5rem;border-radius:50%;background:var(--btn-primary-signal);flex:none}
+.prompt{color:var(--btn-command-prompt)}
+@media (prefers-reduced-motion:no-preference){.btn{transition:transform .15s ease}.btn:hover{transform:translateY(-1px)}}
+section{padding:2.5rem 0}
+h2{margin:0 0 1.25rem;font-size:1.5rem;line-height:1.25;letter-spacing:-.01em}
+.features{display:grid;gap:1rem;margin:0;padding:0;list-style:none;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+.features li{padding:1.25rem;border-radius:8px;background:var(--surface-alt)}
+.features h3{margin:0 0 .35rem;font-size:1.0625rem}
+.features p{margin:0}
+.shot{margin:0}
+.shot img{display:block;width:100%;height:auto;border-radius:8px;background:var(--surface-alt)}
+.contact{text-align:center}
+.contact p{margin:0 auto 1.25rem;max-width:34rem;color:var(--muted)}
+a{color:var(--link);text-underline-offset:.2em}
+a.btn{text-decoration:none}
+footer{padding:2rem 0 3rem;color:var(--muted);font-size:.9375rem;text-align:center}
+footer p{margin:0}
+@media (max-width:30rem){.hero{padding-top:2.5rem}.btn{width:100%;justify-content:center}.actions{flex-direction:column;align-items:stretch}.actions li{display:flex}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<main id="main">
+  <div class="wrap">
+    <section class="hero" aria-labelledby="name">
+      <svg class="logo" viewBox="0 0 512 512" width="112" height="112" aria-hidden="true" focusable="false">
+  <path fill="var(--logo-ink)" d="M256 8a248 248 0 0 0 0 496Z"/>
+  <path fill="var(--logo-paper)" d="M256 8a248 248 0 0 1 0 496Z"/>
+  <circle cx="256" cy="256" r="248" fill="none" stroke="var(--logo-ring)" stroke-width="16"/>
+  <defs>
+    <clipPath id="vn-hero-l"><rect x="0" y="0" width="256" height="512"/></clipPath>
+    <clipPath id="vn-hero-r"><rect x="256" y="0" width="256" height="512"/></clipPath>
+  </defs>
+  <path fill="var(--logo-paper)" clip-path="url(#vn-hero-l)" d="M236.1 290.3Q236.1 291.8 235.9 292.3Q235.7 292.8 235 292.8Q233.9 292.8 230.9 291.2Q227.8 289.6 223.9 287.4Q220 285.2 216.4 283.5Q212.8 281.8 210.6 281.8Q209.6 281.8 207.2 283.5Q204.8 285.2 200.9 287.2Q197.1 289.3 191.6 290.9Q186.1 292.6 178.9 292.6Q163.7 292.6 151.4 287.3Q139.1 282.1 130 272.3Q120.9 262.6 116 249.4Q111 236.1 111 220.4Q111 202.5 116.3 188Q121.6 173.6 131.4 163.1Q141.1 152.6 154.7 146.9Q168.2 141.3 184.6 141.3Q193.4 141.3 199.4 143.6Q205.5 145.9 208.8 148.3Q212.2 150.6 213 150.6Q215 150.6 218.1 148.3Q221.3 146 224.3 143.7Q227.3 141.4 228.6 141.4Q228.8 141.4 229.2 141.6Q229.5 141.9 229.5 143.2L237.2 188.5Q237.5 189.1 237.4 189.4Q237.3 189.8 237 189.9Q236.8 190 236.5 189.9Q236.1 189.8 235.8 189.2Q229.3 172.6 221.3 162.5Q213.3 152.4 204.1 147.7Q195 143.1 185.1 143.1Q172.3 143.1 162.4 151.1Q152.6 159.1 147 175Q141.5 190.9 141.5 214.9Q141.5 238.1 147.6 254.5Q153.8 270.9 164.1 279.6Q174.3 288.4 186.7 288.4Q190 288.4 193.9 287.3Q197.9 286.2 201.4 284.2Q204.8 282.3 207 279.4Q209.2 276.6 209.2 273.2V232.3Q209.2 231 208.2 230.3Q207.2 229.6 205.1 229.4L192.9 228.1Q192.2 228 191.9 227.7Q191.6 227.5 191.6 227.3Q191.6 227.1 191.9 226.8Q192.1 226.6 192.6 226.6H245.7Q246.1 226.6 246.3 226.8Q246.5 227.1 246.5 227.2Q246.5 227.5 246.3 227.7Q246 227.8 245.3 228.1L239 229.5Q237.6 229.7 236.8 230.4Q236.1 231 236.1 232.3ZM321.2 292.7Q311.5 292.7 305.3 289.9Q299.1 287 295.5 284.2Q292 281.4 290.7 281.4Q289.9 281.4 288.3 283.2Q286.7 285 284.8 287.2Q283 289.5 281.3 291.3Q279.6 293.2 278.7 293.2Q278.2 293.2 277.5 292.7Q276.8 292.2 276.5 291.3L268.7 246Q268.6 245.4 268.6 245.1Q268.6 244.7 268.9 244.5Q269.2 244.3 269.6 244.5Q270 244.8 270.1 245.2Q279 263.2 287.2 273Q295.4 282.9 303.3 286.7Q311.2 290.6 318.9 290.6Q330.3 290.6 337.1 284.4Q343.9 278.2 343.9 266.1Q343.9 258.7 340.8 252.5Q337.8 246.2 330.5 241Q323.2 235.8 310.6 231.2Q294 225.3 284.1 218.3Q274.2 211.3 269.8 202.6Q265.5 194 265.5 183.3Q265.5 171 271.8 161.4Q278.1 151.9 289.1 146.6Q300.2 141.3 314.4 141.3Q323.1 141.3 328.9 143.4Q334.8 145.6 338.1 147.7Q341.5 149.9 343.1 149.9Q344.5 149.9 347.2 147.6Q349.9 145.4 352.6 143.1Q355.3 140.8 356.4 140.8Q356.8 140.8 357.3 141.2Q357.7 141.5 357.8 142.3L369.1 187.3Q369.2 187.9 369.1 188.3Q369.1 188.7 368.7 188.9Q368.4 188.9 368.1 188.7Q367.7 188.6 367.5 188.1Q358 170.5 349.5 160.8Q341.1 151 333 147.2Q324.8 143.3 316.2 143.3Q305.2 143.3 298.1 150.4Q291 157.5 291 169.8Q291 177.5 293.9 183.9Q296.8 190.3 303.8 195.7Q310.8 201.1 322.9 205.4Q340.1 211.7 350.1 218.7Q360.1 225.7 364.3 233.9Q368.5 242.1 368.5 252Q368.5 263.4 362.9 272.6Q357.3 281.9 346.7 287.3Q336.1 292.7 321.2 292.7Z"/>
+  <path fill="var(--logo-ink)" clip-path="url(#vn-hero-r)" d="M236.1 290.3Q236.1 291.8 235.9 292.3Q235.7 292.8 235 292.8Q233.9 292.8 230.9 291.2Q227.8 289.6 223.9 287.4Q220 285.2 216.4 283.5Q212.8 281.8 210.6 281.8Q209.6 281.8 207.2 283.5Q204.8 285.2 200.9 287.2Q197.1 289.3 191.6 290.9Q186.1 292.6 178.9 292.6Q163.7 292.6 151.4 287.3Q139.1 282.1 130 272.3Q120.9 262.6 116 249.4Q111 236.1 111 220.4Q111 202.5 116.3 188Q121.6 173.6 131.4 163.1Q141.1 152.6 154.7 146.9Q168.2 141.3 184.6 141.3Q193.4 141.3 199.4 143.6Q205.5 145.9 208.8 148.3Q212.2 150.6 213 150.6Q215 150.6 218.1 148.3Q221.3 146 224.3 143.7Q227.3 141.4 228.6 141.4Q228.8 141.4 229.2 141.6Q229.5 141.9 229.5 143.2L237.2 188.5Q237.5 189.1 237.4 189.4Q237.3 189.8 237 189.9Q236.8 190 236.5 189.9Q236.1 189.8 235.8 189.2Q229.3 172.6 221.3 162.5Q213.3 152.4 204.1 147.7Q195 143.1 185.1 143.1Q172.3 143.1 162.4 151.1Q152.6 159.1 147 175Q141.5 190.9 141.5 214.9Q141.5 238.1 147.6 254.5Q153.8 270.9 164.1 279.6Q174.3 288.4 186.7 288.4Q190 288.4 193.9 287.3Q197.9 286.2 201.4 284.2Q204.8 282.3 207 279.4Q209.2 276.6 209.2 273.2V232.3Q209.2 231 208.2 230.3Q207.2 229.6 205.1 229.4L192.9 228.1Q192.2 228 191.9 227.7Q191.6 227.5 191.6 227.3Q191.6 227.1 191.9 226.8Q192.1 226.6 192.6 226.6H245.7Q246.1 226.6 246.3 226.8Q246.5 227.1 246.5 227.2Q246.5 227.5 246.3 227.7Q246 227.8 245.3 228.1L239 229.5Q237.6 229.7 236.8 230.4Q236.1 231 236.1 232.3ZM321.2 292.7Q311.5 292.7 305.3 289.9Q299.1 287 295.5 284.2Q292 281.4 290.7 281.4Q289.9 281.4 288.3 283.2Q286.7 285 284.8 287.2Q283 289.5 281.3 291.3Q279.6 293.2 278.7 293.2Q278.2 293.2 277.5 292.7Q276.8 292.2 276.5 291.3L268.7 246Q268.6 245.4 268.6 245.1Q268.6 244.7 268.9 244.5Q269.2 244.3 269.6 244.5Q270 244.8 270.1 245.2Q279 263.2 287.2 273Q295.4 282.9 303.3 286.7Q311.2 290.6 318.9 290.6Q330.3 290.6 337.1 284.4Q343.9 278.2 343.9 266.1Q343.9 258.7 340.8 252.5Q337.8 246.2 330.5 241Q323.2 235.8 310.6 231.2Q294 225.3 284.1 218.3Q274.2 211.3 269.8 202.6Q265.5 194 265.5 183.3Q265.5 171 271.8 161.4Q278.1 151.9 289.1 146.6Q300.2 141.3 314.4 141.3Q323.1 141.3 328.9 143.4Q334.8 145.6 338.1 147.7Q341.5 149.9 343.1 149.9Q344.5 149.9 347.2 147.6Q349.9 145.4 352.6 143.1Q355.3 140.8 356.4 140.8Q356.8 140.8 357.3 141.2Q357.7 141.5 357.8 142.3L369.1 187.3Q369.2 187.9 369.1 188.3Q369.1 188.7 368.7 188.9Q368.4 188.9 368.1 188.7Q367.7 188.6 367.5 188.1Q358 170.5 349.5 160.8Q341.1 151 333 147.2Q324.8 143.3 316.2 143.3Q305.2 143.3 298.1 150.4Q291 157.5 291 169.8Q291 177.5 293.9 183.9Q296.8 190.3 303.8 195.7Q310.8 201.1 322.9 205.4Q340.1 211.7 350.1 218.7Q360.1 225.7 364.3 233.9Q368.5 242.1 368.5 252Q368.5 263.4 362.9 272.6Q357.3 281.9 346.7 287.3Q336.1 292.7 321.2 292.7Z"/>
+  <circle cx="256" cy="347.2" r="24" fill="var(--logo-signal)"/>
+      </svg>
+      <h1 id="name">Python Google Search</h1>
+      <p class="tagline">Command-line script that runs a Google search and collects the first 10 result URLs.</p>
+      <p class="lead">Python script that runs a Google search from the command line and collects the first 10 result URLs. MIT licensed.</p>
+      <ul class="actions">
+        <li><a class="btn btn-primary" href="https://github.com/voaneves/python-google-search/blob/main/google_search.py"><span class="dot" aria-hidden="true"></span><span>View the script</span><span aria-hidden="true">&rarr;</span></a></li>
+      </ul>
+    </section>
+    <section aria-labelledby="features-title">
+      <h2 id="features-title">Highlights</h2>
+      <ul class="features">
+        <li><p>Takes the query as a quoted command-line argument.</p></li>
+        <li><p>Collects the first 10 result URLs into a list.</p></li>
+        <li><p>Pauses 2 seconds between requests.</p></li>
+      </ul>
+    </section>
+    <section class="contact" aria-labelledby="hire-title">
+      <h2 id="hire-title">Need something like this?</h2>
+      <p>I build and ship projects like this for teams. Tell me what you need.</p>
+      <a class="btn btn-primary" href="https://voaneves.com/en/#contact"><span class="dot" aria-hidden="true"></span><span>Let&#x27;s talk</span><span aria-hidden="true">&rarr;</span></a>
+    </section>
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <p>Licensed under the MIT license. <a href="https://github.com/voaneves/python-google-search">GitHub</a></p>
+  </div>
+</footer>
+</body>
+</html>
