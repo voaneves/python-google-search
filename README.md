@@ -5,7 +5,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/voaneves/python-google-search/main/assets/logo/logo-dark.svg" />
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/voaneves/python-google-search/main/assets/logo/logo-light.svg" />
-  <img alt="Python Google Search logo: the monogram GS" src="https://raw.githubusercontent.com/voaneves/python-google-search/main/assets/logo/logo-light.svg" width="112" height="112" />
+  <img alt="Python Google Search logo: a magnifying glass, with a red dot for the search result" src="https://raw.githubusercontent.com/voaneves/python-google-search/main/assets/logo/logo-light.svg" width="112" height="112" />
 </picture>
 
 <h1>Python Google Search</h1>
